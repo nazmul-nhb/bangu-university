@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import { Icon } from "@iconify/react";
 import { Button, Flex, Layout, Menu, theme } from "antd";
 import Title from "antd/es/typography/Title";
 import { site_title } from "../configs";
-import { sidebarItems } from "../configs/route-list";
+import { routes } from "../configs/route-list";
+import { formatRoutes } from "../utils/formatRoutes";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -12,6 +13,9 @@ const Root: React.FC = () => {
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	// const { message, notification, modal } = App.useApp();
 	const { token } = theme.useToken();
+
+	const location = useLocation();
+	const selectedKey = location.pathname;
 
 	return (
 		<Layout style={{ minHeight: "100vh" }}>
@@ -21,6 +25,7 @@ const Root: React.FC = () => {
 						color: "white",
 						textAlign: "center",
 						paddingTop: 8,
+						textWrap: "nowrap",
 					}}
 					level={3}
 					title={site_title}
@@ -38,8 +43,8 @@ const Root: React.FC = () => {
 				<Menu
 					theme="dark"
 					mode="inline"
-					defaultSelectedKeys={["home"]}
-					items={sidebarItems}
+					defaultSelectedKeys={[selectedKey]}
+					items={formatRoutes(routes, "menu")}
 				/>
 			</Sider>
 			<Layout>

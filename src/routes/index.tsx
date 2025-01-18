@@ -1,16 +1,13 @@
-import { Route, Routes } from "react-router";
 import Root from "../layouts/Root";
-import Home from "../pages/Home";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
+import { Route, Routes } from "react-router";
+import { formatRoutes } from "../utils/formatRoutes";
+import { routes } from "../configs/route-list";
 
 export const BanguRoutes = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<Root />}>
-				<Route index={true} element={<Home />} />
-				<Route path="about" element={<About />} />
-				<Route path="contact" element={<Contact />} />
+				{formatRoutes(routes, "route")}
 			</Route>
 		</Routes>
 	);
