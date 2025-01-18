@@ -6,7 +6,7 @@ export const BanguRoutes = () => {
 		<Routes>
 			<Route path="/" element={<Root />}>
 				{/* <Route index={true} element={<App />} /> */}
-				<Route path="/hola" element="Hola!" />
+				<Route path="hola" element="Hola!" />
 			</Route>
 		</Routes>
 	);

@@ -2,28 +2,32 @@ import React, { useState } from "react";
 import { Outlet } from "react-router";
 import { Icon } from "@iconify/react";
 import {
-	MenuFoldOutlined,
-	MenuUnfoldOutlined,
 	UploadOutlined,
 	UserOutlined,
 	VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
+import { Button, Flex, Layout, Menu, theme } from "antd";
 import Title from "antd/es/typography/Title";
+import { site_title } from "../configs";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 const Root: React.FC = () => {
 	const [isCollapsed, setIsCollapsed] = useState(false);
+	// const { message, notification, modal } = App.useApp();
 	const { token } = theme.useToken();
 
 	return (
 		<Layout style={{ minHeight: "100vh" }}>
-			<Sider trigger={null} collapsible collapsed={isCollapsed}>
+			<Sider trigger={null} collapsible={true} collapsed={isCollapsed}>
 				<Title
-					style={{ color: "white", textAlign: "center" }}
+					style={{
+						color: "white",
+						textAlign: "center",
+						paddingTop: 8,
+					}}
 					level={3}
-					title="Bangu University"
+					title={site_title}
 				>
 					{isCollapsed ? (
 						<Icon
@@ -32,7 +36,7 @@ const Root: React.FC = () => {
 							height="40"
 						/>
 					) : (
-						"Bangu University"
+						site_title
 					)}
 				</Title>
 				<Menu
@@ -66,9 +70,17 @@ const Root: React.FC = () => {
 						type="text"
 						icon={
 							isCollapsed ? (
-								<MenuUnfoldOutlined />
+								<Icon
+									icon="line-md:menu-unfold-right"
+									width="24"
+									height="24"
+								/>
 							) : (
-								<MenuFoldOutlined />
+								<Icon
+									icon="line-md:menu-unfold-left"
+									width="24"
+									height="24"
+								/>
 							)
 						}
 						onClick={() => setIsCollapsed(!isCollapsed)}
@@ -87,8 +99,15 @@ const Root: React.FC = () => {
 						borderRadius: token.borderRadiusLG,
 					}}
 				>
+					<Flex gap={6} justify="space-between">
+						<h2>Abul</h2>
+						<h2>Babul</h2>
+					</Flex>
 					<Outlet />
 				</Content>
+				<Footer style={{ textAlign: "center" }}>
+					&copy; {new Date().getFullYear()} {site_title}
+				</Footer>
 			</Layout>
 		</Layout>
 	);
